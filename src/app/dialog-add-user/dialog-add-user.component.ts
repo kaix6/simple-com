@@ -8,6 +8,9 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { User } from '../../models/user.class';
 import { FormsModule } from '@angular/forms';
+import { inject } from '@angular/core';
+import { Firestore, collection, addDoc } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-dialog-add-user',
@@ -19,7 +22,7 @@ import { FormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    FormsModule,
+    FormsModule
   ],
   templateUrl: './dialog-add-user.component.html',
   styleUrl: './dialog-add-user.component.scss',
@@ -29,8 +32,24 @@ export class DialogAddUserComponent {
   user: User = new User();
   birthDate: Date | undefined;
 
+  constructor(private firestore: Firestore) {
+
+  }
+
   saveUser() {
     this.user.birthDate = this.birthDate?.getTime() || 0;
     console.log('current User is', this.user);
+
+    // Referenz zur 'users'-Sammlung erstellen
+    const userCollection = collection(this.firestore, 'users');
+    
+    // Dokument hinzufügen
+    addDoc(userCollection, this.user.toJSON())
+      .then((result: any) => {
+        console.log('Adding user finished', result);
+      })
+      .catch((error: any) => {
+        console.error('Error adding user:', error);
+      });
   }
 }
