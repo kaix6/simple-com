@@ -25,7 +25,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatDialogModule,
   ],
   templateUrl: './app.component.html',
-  styleUrls: ['app.component.scss']
+  styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
   title = 'simple-crm';
@@ -34,7 +34,7 @@ export class AppComponent {
   items$: Observable<any[]>;
 
   constructor() {
-    const aCollection = collection(this.firestore, 'items')
+    const aCollection = collection(this.firestore, 'items');
     this.items$ = collectionData(aCollection);
   }
 }

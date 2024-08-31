@@ -21,20 +21,20 @@ import { RouterModule } from '@angular/router';
     MatTooltipModule,
     MatDialogModule,
     MatCardModule,
-    CommonModule, 
-    RouterModule
+    CommonModule,
+    RouterModule,
   ],
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss'], // <-- styleUrl in styleUrls geändert
+  styleUrls: ['./user.component.scss'],
 })
 export class UserComponent {
   user: User = new User();
-  users$: Observable<any[]>;  // Observable für die Nutzerdaten
+  users$: Observable<any[]>;
   allUsers: any[] | undefined;
 
   constructor(public dialog: MatDialog, private firestore: Firestore) {
     const usersCollection = collection(this.firestore, 'users');
-    this.users$ = collectionData(usersCollection, { idField: 'id'});
+    this.users$ = collectionData(usersCollection, { idField: 'id' });
   }
 
   ngOnInit(): void {

@@ -43,10 +43,8 @@ export class DialogAddUserComponent {
     this.user.birthDate = this.birthDate?.getTime() || 0;
     console.log('current User is', this.user);
     this.loading = true;
-    // Referenz zur 'users'-Sammlung erstellen
     const userCollection = collection(this.firestore, 'users');
 
-    // Dokument hinzufügen
     addDoc(userCollection, this.user.toJSON())
       .then((result: any) => {
         this.loading = false;
