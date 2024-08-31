@@ -19,7 +19,8 @@ export const appConfig: ApplicationConfig = {
         apiKey: 'AIzaSyDMJWVeabC_nAbn0CQfe7nt9DayO-IzQtM',
         authDomain: 'simple-crm-f0465.firebaseapp.com',
         messagingSenderId: '708015033314',
-        databaseURL: 'https://simple-crm-f0465-default-rtdb.europe-west1.firebasedatabase.app',
+        databaseURL:
+          'https://simple-crm-f0465-default-rtdb.europe-west1.firebasedatabase.app',
       })
     ),
     provideFirestore(() => getFirestore()),
