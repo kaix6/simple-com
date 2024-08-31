@@ -23,7 +23,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatNativeDateModule,
     FormsModule,
     MatProgressBarModule,
-    MatDialogModule
+    MatDialogModule,
   ],
   templateUrl: './dialog-add-user.component.html',
   styleUrl: './dialog-add-user.component.scss',
@@ -34,19 +34,22 @@ export class DialogAddUserComponent {
   birthDate: Date | undefined;
   loading: boolean = false;
 
-  constructor(private firestore: Firestore, public dialogRef: MatDialogRef<DialogAddUserComponent>) {}
+  constructor(
+    private firestore: Firestore,
+    public dialogRef: MatDialogRef<DialogAddUserComponent>
+  ) {}
 
   saveUser() {
     this.user.birthDate = this.birthDate?.getTime() || 0;
     console.log('current User is', this.user);
-this.loading = true;
+    this.loading = true;
     // Referenz zur 'users'-Sammlung erstellen
     const userCollection = collection(this.firestore, 'users');
 
     // Dokument hinzufügen
     addDoc(userCollection, this.user.toJSON())
       .then((result: any) => {
-        this.loading = false
+        this.loading = false;
         console.log('Adding user finished', result);
         this.dialogRef.close();
       })
